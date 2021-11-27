@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace pozitronik\dbmon\controllers;
 
 use pozitronik\dbmon\models\DbMonitor;
+use pozitronik\helpers\BootstrapHelper;
 use Throwable;
 use Yii;
 use yii\data\ArrayDataProvider;
@@ -14,6 +15,13 @@ use yii\web\Response;
  * Class DbController
  */
 class DbController extends Controller {
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getViewPath():string {
+		return parent::getViewPath().DIRECTORY_SEPARATOR.(BootstrapHelper::isBs4()?'bs4':'bs3');
+	}
 
 	/**
 	 * Список процессов на базе данных
