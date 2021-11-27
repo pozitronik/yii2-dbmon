@@ -6,7 +6,7 @@ namespace pozitronik\dbmon\models;
 use pozitronik\helpers\ArrayHelper;
 use Throwable;
 use yii\base\Model;
-use yii\db\ActiveQuery;
+use yii\db\QueryInterface;
 
 /**
  * Class SqlDebugInfo
@@ -48,12 +48,12 @@ class SqlDebugInfo extends Model {
 	}
 
 	/**
-	 * @param ActiveQuery $query
+	 * @param QueryInterface $query
 	 * @param string|null $operation
 	 * @param int|null $user_id
-	 * @return ActiveQuery
+	 * @return QueryInterface
 	 */
-	public static function addDebugInfo(ActiveQuery $query, ?string $operation = null, ?int $user_id = null):ActiveQuery {
+	public static function addDebugInfo(QueryInterface $query, ?string $operation = null, ?int $user_id = null):QueryInterface {
 		$sqlDebugInfo = new self(compact('operation', 'user_id'));
 		return $query->andWhere("1 = 1{$sqlDebugInfo}");
 	}
