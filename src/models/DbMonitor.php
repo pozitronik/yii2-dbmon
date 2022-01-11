@@ -20,7 +20,7 @@ class DbMonitor {
 		$result = [];
 		try {
 			$pList = Yii::$app->db->createCommand('SHOW FULL PROCESSLIST')->queryAll();
-		} /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable $t) {
+		} /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable) {
 			$pList = [];
 		}
 		$debugInfo = new SqlDebugInfo();
@@ -47,7 +47,7 @@ class DbMonitor {
 	public static function kill(int $process_id):?int {
 		try {
 			return Yii::$app->db->createCommand("kill {$process_id}")->execute();
-		} /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable $t) {
+		} /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable) {
 			return null;
 		}
 	}
